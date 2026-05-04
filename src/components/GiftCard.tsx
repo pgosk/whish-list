@@ -18,19 +18,19 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
             className={`
         relative flex flex-col rounded-3xl overflow-hidden shadow-md hover:shadow-xl
         transition-all duration-300 border-2
-        ${isReservedByMe ? 'bg-rose-50 border-fuchsia-400 ring-2 ring-fuchsia-300 ring-offset-2' : 'bg-white'}
+        ${isReservedByMe ? 'bg-sky-50 border-blue-400 ring-2 ring-blue-300 ring-offset-2' : 'bg-white'}
         ${isReservedByOther ? 'border-gray-200 opacity-80' : ''}
-        ${isAvailable ? 'border-pink-200 hover:-translate-y-1' : ''}
+        ${isAvailable ? 'border-sky-200 hover:-translate-y-1' : ''}
       `}
         >
             {/* Badge */}
             {isReservedByMe && (
-                <div className="absolute top-3 left-3 z-10 bg-rose-500 text-white text-xs font-black px-3 py-1 rounded-full shadow-md">
-                    ✨ Twój wybór!
+                <div className="absolute top-3 left-3 z-10 bg-blue-500 text-white text-xs font-black px-3 py-1 rounded-full shadow-md">
+                    👑 Twój wybór!
                 </div>
             )}
             {isReservedByOther && (
-                <div className="absolute top-3 left-3 z-10 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                <div className="absolute top-3 left-3 z-10 bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
                     🔒 Zarezerwowane
                 </div>
             )}
@@ -43,7 +43,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                     className={`w-full h-full object-cover transition-transform duration-300 ${isAvailable ? 'group-hover:scale-105' : ''}`}
                     onError={(e) => {
                         (e.target as HTMLImageElement).src =
-                            'https://placehold.co/400x400/fce7f3/f43f5e?text=🎁';
+                            'https://placehold.co/400x400/e0f2fe/0369a1?text=👑';
                     }}
                 />
                 {isReservedByOther && (
@@ -68,8 +68,8 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                 )}
 
                 {isReservedByMe && (
-                    <div className="flex items-center gap-1.5 text-sm text-rose-600 bg-rose-50 rounded-xl px-3 py-2">
-                        <span>🎁</span>
+                    <div className="flex items-center gap-1.5 text-sm text-blue-600 bg-sky-50 rounded-xl px-3 py-2">
+                        <span>💎</span>
                         <span className="font-bold">To Twój prezent!</span>
                     </div>
                 )}
@@ -82,7 +82,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                             href={gift.shop_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-1.5 text-sm font-bold text-pink-600 bg-pink-50 hover:bg-pink-100 border border-pink-200 hover:border-pink-300 rounded-2xl px-3 py-2 transition-all duration-200"
+                            className="flex items-center justify-center gap-1.5 text-sm font-bold text-sky-600 bg-sky-50 hover:bg-sky-100 border border-sky-200 hover:border-sky-300 rounded-2xl px-3 py-2 transition-all duration-200"
                         >
                             <span>🛒</span>
                             <span>Zobacz na Allegro</span>
@@ -102,9 +102,9 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                     {isAvailable && currentUser && (
                         <button
                             onClick={() => onReserve(gift)}
-                            className="flex items-center justify-center gap-2 w-full bg-linear-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white font-black rounded-2xl px-4 py-2.5 shadow-md hover:shadow-lg active:scale-95 transition-all duration-200"
+                            className="flex items-center justify-center gap-2 w-full bg-linear-to-r from-sky-400 to-blue-500 hover:from-sky-500 hover:to-blue-600 text-white font-black rounded-2xl px-4 py-2.5 shadow-md hover:shadow-lg active:scale-95 transition-all duration-200"
                         >
-                            🎁 Rezerwuję!
+                            👸 Rezerwuję!
                         </button>
                     )}
 
@@ -121,7 +121,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                     {isReservedByMe && (
                         <button
                             onClick={() => onCancel(gift)}
-                            className="flex items-center justify-center gap-2 w-full bg-white text-rose-400 hover:text-rose-600 font-bold rounded-2xl px-4 py-2.5 border-2 border-rose-200 hover:border-rose-400 active:scale-95 transition-all duration-200"
+                            className="flex items-center justify-center gap-2 w-full bg-white text-sky-400 hover:text-sky-600 font-bold rounded-2xl px-4 py-2.5 border-2 border-sky-200 hover:border-sky-400 active:scale-95 transition-all duration-200"
                         >
                             ✕ Anuluj rezerwację
                         </button>

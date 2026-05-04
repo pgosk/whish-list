@@ -138,15 +138,15 @@ export default function App() {
       <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-8">
         {/* Decorative heading */}
         <div className="text-center mb-8">
-          <p className="text-4xl mb-2">🎀🎈🎉</p>
-          <h2 className="text-xl md:text-2xl font-black text-fuchsia-500">
-            Wybierz prezent dla Michalinki!
+          <p className="text-4xl mb-2">👑�👸✨</p>
+          <h2 className="text-xl md:text-2xl font-black text-sky-600">
+            Prezenty dla naszej Księżniczki!
           </h2>
-          <p className="text-sm text-pink-400 mt-1 font-semibold">
-            Kliknij „Rezerwuję" i spraw, żeby jej urodziny były wyjątkowe 💖
+          <p className="text-sm text-blue-400 mt-1 font-semibold">
+            Kliknij „Rezerwuję" i spraw, żeby jej urodziny były bajkowe ✨
           </p>
           {!user && !authLoading && (
-            <p className="text-xs text-gray-400 mt-2 bg-rose-50 rounded-full inline-block px-4 py-1 border border-rose-100">
+            <p className="text-xs text-gray-400 mt-2 bg-sky-50 rounded-full inline-block px-4 py-1 border border-sky-100">
               🔐 Zaloguj się przez Google, aby zarezerwować prezent
             </p>
           )}
@@ -161,8 +161,8 @@ export default function App() {
         />
       </main>
 
-      <footer className="text-center py-6 text-xs text-pink-300 font-semibold">
-        🎂 Michalinka 6. Urodziny 🎂 • zrobione z ❤️
+      <footer className="text-center py-6 text-xs text-sky-300 font-semibold">
+        👑 Michalinka 6. Urodziny Księżniczki 👑 • zrobione z ❤️
       </footer>
 
       <ThankYouModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

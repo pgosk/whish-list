@@ -12,12 +12,12 @@ interface GiftGridProps {
 
 function SkeletonCard() {
     return (
-        <div className="rounded-3xl overflow-hidden border-2 border-pink-100 bg-white shadow-md animate-pulse">
-            <div className="aspect-square bg-rose-100" />
+        <div className="rounded-3xl overflow-hidden border-2 border-sky-100 bg-white shadow-md animate-pulse">
+            <div className="aspect-square bg-sky-100" />
             <div className="p-4 flex flex-col gap-3">
-                <div className="h-4 bg-rose-100 rounded-full w-3/4" />
-                <div className="h-4 bg-rose-50 rounded-full w-1/2" />
-                <div className="h-10 bg-pink-100 rounded-2xl mt-auto" />
+                <div className="h-4 bg-sky-100 rounded-full w-3/4" />
+                <div className="h-4 bg-sky-50 rounded-full w-1/2" />
+                <div className="h-10 bg-sky-100 rounded-2xl mt-auto" />
             </div>
         </div>
     );
