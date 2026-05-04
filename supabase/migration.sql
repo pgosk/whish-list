@@ -18,12 +18,14 @@ CREATE TABLE IF NOT EXISTS public.gifts (
 ALTER TABLE public.gifts ENABLE ROW LEVEL SECURITY;
 
 -- 3. Policy: Everyone can read gifts
+DROP POLICY IF EXISTS "Anyone can read gifts" ON public.gifts;
 CREATE POLICY "Anyone can read gifts"
   ON public.gifts
   FOR SELECT
   USING (true);
 
 -- 4. Policy: Authenticated user can reserve a gift (only if not already reserved)
+DROP POLICY IF EXISTS "Authenticated user can reserve available gift" ON public.gifts;
 CREATE POLICY "Authenticated user can reserve available gift"
   ON public.gifts
   FOR UPDATE
@@ -32,6 +34,7 @@ CREATE POLICY "Authenticated user can reserve available gift"
   WITH CHECK (reserved_by_user_id = auth.uid());
 
 -- 5. Policy: Authenticated user can cancel their OWN reservation
+DROP POLICY IF EXISTS "Authenticated user can cancel own reservation" ON public.gifts;
 CREATE POLICY "Authenticated user can cancel own reservation"
   ON public.gifts
   FOR UPDATE
@@ -40,41 +43,32 @@ CREATE POLICY "Authenticated user can cancel own reservation"
   WITH CHECK (reserved_by_user_id IS NULL);
 
 -- 6. Enable Realtime for the gifts table
--- (Run in Supabase Dashboard → Database → Replication → enable gifts table,
---  OR run the statement below)
-ALTER PUBLICATION supabase_realtime ADD TABLE public.gifts;
+-- (Zapewnia, że Realtime jest włączony, nie rzuca błędem jeśli już jest)
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_publication_tables 
+    WHERE pubname = 'supabase_realtime' AND tablename = 'gifts'
+  ) THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.gifts;
+  END IF;
+END $$;
 
 -- ============================================================
--- SAMPLE DATA — usuń lub dostosuj przed wdrożeniem
+-- GIFT DATA — Real list provided by the user
 -- ============================================================
+TRUNCATE public.gifts;
 INSERT INTO public.gifts (name, image_url, shop_url) VALUES
-  (
-    'Lalka Barbie z akcesoriami',
-    'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=400&fit=crop',
-    'https://allegro.pl/listing?string=barbie+lalka'
-  ),
-  (
-    'Zestaw LEGO Friends',
-    'https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400&h=400&fit=crop',
-    'https://allegro.pl/listing?string=lego+friends'
-  ),
-  (
-    'Hulajnoga elektryczna dla dzieci',
-    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop',
-    'https://allegro.pl/listing?string=hulajnoga+elektryczna+dziecko'
-  ),
-  (
-    'Zestaw do malowania i rysowania',
-    'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=400&fit=crop',
-    'https://allegro.pl/listing?string=zestaw+do+rysowania+dzieci'
-  ),
-  (
-    'Gra planszowa Dobble',
-    'https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop',
-    'https://allegro.pl/listing?string=dobble+gra+planszowa'
-  ),
-  (
-    'Rowerek biegowy',
-    'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=400&h=400&fit=crop',
-    'https://allegro.pl/listing?string=rowerek+biegowy'
-  );
+('Kicia Kocia ratuje boisko', '/gifts/kicia-kocia-ratuje-boisko.jpeg', 'https://allegro.pl/oferta/kicia-kocia-ratuje-boisko-anita-glowinska-18486955623'),
+('Kamienie sensoryczne dla dzieci zestaw 5 szt.', '/gifts/fizjo.jpeg', 'https://4fizjo.pl/projector.php?product=1997'),
+('Rainbow High - Modna Lalka z Zestawem Slime i Zwierzątkiem - Amaya (Tęczowa)', '/gifts/rainbow-tecza.jpeg', 'https://www.amazon.pl/dp/B0CLVJ568P'),
+('Milly Mally Hobby Koń na Kiju White', '/gifts/kon.jpeg', 'https://allegro.pl/oferta/milly-mally-hobby-kon-na-kiju-white-18337264828'),
+('ZESTAW DO MALOWANIA TWARZY UNICORN SNAZAROO', '/gifts/snazaro.jpeg', 'https://allegro.pl/oferta/zestaw-do-malowania-twarzy-unicorn-snazaroo-18119195689'),
+('Kicia Kocia gra Zgadnij kto to', '/gifts/zgadnij-kto-to.jpeg', 'https://allegro.pl/oferta/kicia-kocia-gra-zgadnij-kto-to-gra-w-zgadywanie-dla-dzieci-6-lat-18147962478'),
+('LEGO Friends 42689 Klub Przyjaciół w Miasteczku Heartlake', '/gifts/lego.jpeg', 'https://allegro.pl/oferta/lego-friends-42689-klub-przyjaciol-w-miasteczku-heartlake-18209900299'),
+('Smiki My 1st Super Guitar Gitara', '/gifts/gitara.jpeg', 'https://www.smyk.com/p/smiki-my-1st-super-guitar-gitara-i6010309'),
+('Rainbow High - Modna Lalka z Zestawem Slime i Zwierzątkiem - Skyler (Niebieska)', '/gifts/rainbow.jpeg', 'https://www.amazon.pl/dp/B0CLVKBNJM'),
+('JUŻ WIEM JAK ALBIK ALBI', '/gifts/albik.jpeg', 'https://allegro.pl/oferta/czytaj-z-albikiem-ksiazka-interaktywna-mowiaca-juz-wiem-jak-albik-albi-18459653658'),
+('Tablet graficzny do rysowania z szablonami Kidydraw Mini Kidywolf - Kawai', '/gifts/tablet.jpeg', 'https://www.tublu.pl/zabawki-edukacyjne/zabawki-plastyczne/tablet-graficzny-do-rysowania-z-szablonami-kidydraw-mini-kidywolf-kawai.html'),
+('Wkłady uzupełniające do tabletu Kidydraw Mini Kidywolf - Gry i edukacja 60 szt.', '/gifts/kidwolf.jpeg', 'https://www.tublu.pl/zabawki-edukacyjne/zabawki-plastyczne/wklady-uzupelniajace-do-tabletu-kidydraw-mini-kidywolf-gry-i-edukacja-60-szt.html'),
+('Zestaw disco karaoke MOB na 2 mikrofony z projektorem różowy', '/gifts/mikrofon.jpeg', 'https://www.tublu.pl/zabawki-edukacyjne/instrumenty-muzyczne/zestaw-disco-karaoke-mob-na-2-mikrofony-z-projektorem-rozowy.html');
