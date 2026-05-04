@@ -127,14 +127,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                         </button>
                     )}
 
-                    {isReservedByOther && (
-                        <button
-                            disabled
-                            className="flex items-center justify-center gap-2 w-full bg-gray-100 text-gray-400 font-bold rounded-2xl px-4 py-2.5 cursor-not-allowed"
-                        >
-                            🔒 Niedostępne
-                        </button>
-                    )}
+
                 </div>
             </div>
         </div>
