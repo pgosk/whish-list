@@ -36,7 +36,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
             )}
 
             {/* Image */}
-            <div className="relative w-full aspect-square overflow-hidden bg-rose-50">
+            <div className="relative w-full aspect-square overflow-hidden bg-sky-50">
                 <img
                     src={gift.image_url}
                     alt={gift.name}
@@ -47,7 +47,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                     }}
                 />
                 {isReservedByOther && (
-                    <div className="absolute inset-0 bg-white/60 backdrop-blur-sm" />
+                    <div className="absolute inset-0 bg-white/80" />
                 )}
             </div>
 
@@ -85,7 +85,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                             className="flex items-center justify-center gap-1.5 text-sm font-bold text-sky-600 bg-sky-50 hover:bg-sky-100 border border-sky-200 hover:border-sky-300 rounded-2xl px-3 py-2 transition-all duration-200"
                         >
                             <span>🛒</span>
-                            <span>Zobacz na Allegro</span>
+                            <span>Zobacz</span>
                             <svg
                                 className="w-3 h-3 opacity-60"
                                 viewBox="0 0 24 24"

@@ -138,7 +138,7 @@ export default function App() {
       <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-8">
         {/* Decorative heading */}
         <div className="text-center mb-8">
-          <p className="text-4xl mb-2">👑👸✨</p>
+          <p className="text-4xl mb-2">👑💕👸✨</p>
           <h2 className="text-xl md:text-2xl font-black text-sky-600">
             Prezenty dla naszej Księżniczki!
           </h2>

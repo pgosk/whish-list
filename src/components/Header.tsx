@@ -13,12 +13,12 @@ export function Header({ user, isLoading }: HeaderProps) {
     };
 
     return (
-        <header className="sticky top-0 z-10 backdrop-blur-md bg-white/70 border-b border-sky-200 shadow-sm">
+        <header className="sticky top-0 z-20 backdrop-blur-md bg-white/70 border-b border-sky-200 shadow-sm">
             <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 min-w-0">
                     <span className="text-2xl md:text-3xl select-none">👑</span>
                     <div className="min-w-0">
-                        <h1 className="text-lg md:text-2xl font-black text-sky-600 leading-tight truncate">
+                        <h1 className="text-xl md:text-2xl font-black text-sky-600 leading-tight">
                             Lista prezentów Michalinki
                         </h1>
                         <p className="text-xs md:text-sm text-blue-400 font-semibold hidden sm:block">
