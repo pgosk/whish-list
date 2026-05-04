@@ -17,8 +17,8 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
         <div
             className={`
         relative flex flex-col rounded-3xl overflow-hidden shadow-md hover:shadow-xl
-        transition-all duration-300 bg-white border-2
-        ${isReservedByMe ? 'border-rose-500 ring-2 ring-rose-300 ring-offset-2' : ''}
+        transition-all duration-300 border-2
+        ${isReservedByMe ? 'bg-rose-50 border-fuchsia-400 ring-2 ring-fuchsia-300 ring-offset-2' : 'bg-white'}
         ${isReservedByOther ? 'border-gray-200 opacity-80' : ''}
         ${isAvailable ? 'border-pink-200 hover:-translate-y-1' : ''}
       `}

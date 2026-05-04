@@ -4,12 +4,14 @@ import { supabase } from './lib/supabaseClient';
 import type { Gift } from './types/gift';
 import { Header } from './components/Header';
 import { GiftGrid } from './components/GiftGrid';
+import { ThankYouModal } from './components/ThankYouModal';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
   const [gifts, setGifts] = useState<Gift[]>([]);
   const [giftsLoading, setGiftsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // --- Auth ---
   useEffect(() => {
@@ -90,6 +92,8 @@ export default function App() {
         console.error('Reserve error:', error.message);
         // Refetch to sync state
         await fetchGifts();
+      } else {
+        setIsModalOpen(true);
       }
     },
     [user, fetchGifts]
@@ -160,6 +164,8 @@ export default function App() {
       <footer className="text-center py-6 text-xs text-pink-300 font-semibold">
         🎂 Michalinka 6. Urodziny 🎂 • zrobione z ❤️
       </footer>
+
+      <ThankYouModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
