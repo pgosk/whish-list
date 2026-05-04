@@ -18,7 +18,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
             className={`
         relative flex flex-col rounded-3xl overflow-hidden shadow-md hover:shadow-xl
         transition-all duration-300 bg-white border-2
-        ${isReservedByMe ? 'border-rose-400 ring-2 ring-rose-300 ring-offset-2' : ''}
+        ${isReservedByMe ? 'border-rose-500 ring-2 ring-rose-300 ring-offset-2' : ''}
         ${isReservedByOther ? 'border-gray-200 opacity-80' : ''}
         ${isAvailable ? 'border-pink-200 hover:-translate-y-1' : ''}
       `}
@@ -30,7 +30,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                 </div>
             )}
             {isReservedByOther && (
-                <div className="absolute top-3 left-3 z-10 bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                <div className="absolute top-3 left-3 z-10 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
                     🔒 Zarezerwowane
                 </div>
             )}
@@ -47,7 +47,7 @@ export function GiftCard({ gift, currentUser, onReserve, onCancel }: GiftCardPro
                     }}
                 />
                 {isReservedByOther && (
-                    <div className="absolute inset-0 bg-gray-100/40 backdrop-blur-[1px]" />
+                    <div className="absolute inset-0 bg-white/60 backdrop-blur-sm" />
                 )}
             </div>
 

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from './lib/supabaseClient';
 import type { Gift } from './types/gift';
@@ -117,6 +117,16 @@ export default function App() {
     [user, fetchGifts]
   );
 
+  // --- Sort: my reservation first, available in middle, others' last ---
+  const sortedGifts = useMemo(() => {
+    const priority = (g: Gift) => {
+      if (g.reserved_by_user_id === user?.id) return 0; // my pick — first
+      if (g.reserved_by_user_id === null) return 1;      // available — middle
+      return 2;                                          // reserved by other — last
+    };
+    return [...gifts].sort((a, b) => priority(a) - priority(b));
+  }, [gifts, user?.id]);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header user={user} isLoading={authLoading} />
@@ -139,7 +149,7 @@ export default function App() {
         </div>
 
         <GiftGrid
-          gifts={gifts}
+          gifts={sortedGifts}
           currentUser={user}
           isLoading={giftsLoading}
           onReserve={handleReserve}
